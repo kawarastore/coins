@@ -14,6 +14,7 @@
             --secondary: #2979ff;
             --accent: #ffdf5c;
             --gold: #ffd700;
+            --discord: #5865F2;
             --dark-bg: #0b0c0f;
             --dark-card: #14161c;
             --text-light: rgba(255, 255, 255, 0.85);
@@ -454,6 +455,33 @@
             box-shadow: none;
         }
 
+        /* Discord Button Style */
+        .btn-discord {
+            width: auto;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, var(--discord), #4752C4);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-family: "Poppins", sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 10px;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(88, 101, 242, 0.3);
+        }
+
+        .btn-discord:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(88, 101, 242, 0.4);
+        }
+
         footer {
             margin-top: 60px;
             padding: 40px 20px;
@@ -511,6 +539,11 @@
             
             .order-form-container {
                 position: static;
+            }
+            
+            .btn-discord {
+                padding: 12px 25px;
+                font-size: 1rem;
             }
         }
     </style>
@@ -636,9 +669,9 @@
                 </div>
                 
                 <div style="text-align:center; margin-top: 40px;">
-                    <a href="https://chat.whatsapp.com/examplegroup" target="_blank" 
-                       class="btn-order" style="width: auto; margin: 10px; padding: 15px 30px; display: inline-block;">
-                        <i class="fab fa-whatsapp"></i> Gabung Grup WhatsApp
+                    <a href="https://discord.gg/h2sSPGr8Zg" target="_blank" 
+                       class="btn-discord">
+                        <i class="fab fa-discord"></i> Gabung Discord Kami
                     </a>
                 </div>
             </div>

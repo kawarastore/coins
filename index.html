@@ -661,7 +661,7 @@
                 id: 1,
                 name: "Admin Zycho",
                 phone: "6281928617289",
-                avatar: "Z",
+                avatar: "R",
                 paymentMethods: ["DANA"],
                 paymentNotes: "Transfer Manual, konfirmasi cepat",
                 coinsPrice: {
@@ -678,8 +678,8 @@
             {
                 id: 2,
                 name: "Admin 1Bay",
-                phone: "6281234567890", // Ganti dengan nomor asli
-                avatar: "1",
+                phone: "123",
+                avatar: "S",
                 paymentMethods: ["DANA"],
                 paymentNotes: "Transfer Manual, konfirmasi cepat",
                 coinsPrice: {
@@ -696,7 +696,7 @@
             {
                 id: 3,
                 name: "Admin Andre",
-                phone: "6281234567891", // Ganti dengan nomor asli
+                phone: "123",
                 avatar: "A",
                 paymentMethods: ["DANA"],
                 paymentNotes: "Transfer Manual, konfirmasi cepat",
@@ -714,8 +714,8 @@
             {
                 id: 4,
                 name: "Admin Kiel",
-                phone: "6281234567892", // Ganti dengan nomor asli
-                avatar: "K",
+                phone: "123",
+                avatar: "M",
                 paymentMethods: ["DANA"],
                 paymentNotes: "Transfer Manual, konfirmasi cepat",
                 coinsPrice: {
@@ -967,7 +967,7 @@
             }, duration);
         }
         
-        // Place order function - FIXED VERSION
+        // Place order function
         function placeOrder() {
             const username = document.getElementById('username').value.trim();
             
@@ -978,7 +978,7 @@
             
             // Format pesan WhatsApp
             const message = `Halo ${selectedAdminName}, saya ingin membeli coins:
-
+            
 Username/ID Game: ${username}
 Jumlah Coins: ${selectedCoin} (${selectedCoinAmount})
 Harga: ${formatRupiah(selectedCoinPrice)}
@@ -986,34 +986,36 @@ Metode Pembayaran: ${selectedAdmin.paymentMethods.join(', ')}
 
 Apakah coins ini tersedia?`;
             
-            // Hapus karakter khusus yang mengganggu URL encoding
-            const cleanMessage = message.replace(/\n/g, '%0a').replace(/:/g, '%3a');
+            // Encode message for URL
+            const encodedMessage = encodeURIComponent(message);
             
-            // Format URL WhatsApp yang benar
-            const whatsappURL = `https://api.whatsapp.com/send?phone=${selectedAdminPhone}&text=${cleanMessage}`;
+            // Create WhatsApp URL
+            const whatsappURL = `https://wa.me/${selectedAdminPhone}?text=${encodedMessage}`;
             
             // Open WhatsApp in new tab
             window.open(whatsappURL, '_blank');
             
-            // Tampilkan pesan konfirmasi
+            // Show success message
             showNotification(`Mengarahkan ke WhatsApp ${selectedAdminName}...`);
-        }
-        
-        // TEST FUNCTION: Untuk mengetes URL WhatsApp
-        function testWhatsAppURL() {
-            const testMessage = `Halo Admin, ini pesan tes.
             
-Username: TestUser
-Coins: 1M
-Harga: Rp 15,000
-
-Apakah tersedia?`;
-            
-            const encodedTest = testMessage.replace(/\n/g, '%0a').replace(/:/g, '%3a');
-            const testURL = `https://api.whatsapp.com/send?phone=6281928617289&text=${encodedTest}`;
-            
-            console.log("Test URL:", testURL);
-            window.open(testURL, '_blank');
+            // Reset form (optional)
+            /*
+            document.getElementById('username').value = '';
+            document.querySelectorAll('.item-card').forEach(card => card.classList.remove('selected'));
+            document.querySelectorAll('.admin-card').forEach(card => card.classList.remove('selected'));
+            document.getElementById('selected-coin').value = '';
+            document.getElementById('selected-admin').value = '';
+            document.getElementById('coin-summary').textContent = '0';
+            document.getElementById('price-summary').textContent = 'Rp 0';
+            document.getElementById('total-summary').textContent = 'Rp 0';
+            selectedCoin = null;
+            selectedAdmin = null;
+            selectedCoinPrice = 0;
+            selectedCoinAmount = '';
+            selectedAdminName = '';
+            selectedAdminPhone = '';
+            checkOrderButton();
+            */
         }
         
         // Auto-select first coin and first admin on page load
@@ -1027,9 +1029,6 @@ Apakah tersedia?`;
             if (firstAdmin) {
                 firstAdmin.click();
             }
-            
-            // Untuk testing: uncomment baris berikut untuk melihat URL WhatsApp yang dibuat
-            // console.log("Halaman dimuat. Fungsi WhatsApp siap digunakan.");
         }, 500);
     </script>
 </body>
